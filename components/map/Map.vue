@@ -155,13 +155,13 @@ export default {
     },
     theme (val) {
       const {map} = this
-      map.setMapStyleV2({styleJson: val})
+      map.setMapStyle({styleJson: val})
     },
     'mapStyle.features': {
       handler (val, oldVal) {
         const {map, mapStyle} = this
         const {style, styleJson} = mapStyle
-        map.setMapStyleV2({
+        map.setMapStyle({
           styleJson,
           features: val,
           style
@@ -172,7 +172,7 @@ export default {
     'mapStyle.style' (val, oldVal) {
       const {map, mapStyle} = this
       const {features, styleJson} = mapStyle
-      map.setMapStyleV2({
+      map.setMapStyle({
         styleJson,
         features,
         style: val
@@ -182,7 +182,7 @@ export default {
       handler (val, oldVal) {
         const {map, mapStyle} = this
         const {features, style} = mapStyle
-        map.setMapStyleV2({
+        map.setMapStyle({
           styleJson: val,
           features,
           style
@@ -192,7 +192,7 @@ export default {
     },
     mapStyle (val) {
       const {map, theme} = this
-      !theme && map.setMapStyleV2(val)
+      !theme && map.setMapStyle(val)
     }
   },
   methods: {
@@ -224,7 +224,7 @@ export default {
       const map = new BMap.Map($el, {enableHighResolution: this.highResolution, enableMapClick: this.mapClick})
       this.map = map
       const {setMapOptions, zoom, getCenterPoint, theme, mapStyle} = this
-      theme ? map.setMapStyleV2({styleJson: theme}) : map.setMapStyleV2(mapStyle)
+      theme ? map.setMapStyle({styleJson: theme}) : map.setMapStyle(mapStyle)
       setMapOptions()
       bindEvents.call(this, map)
       // 此处强行初始化一次地图 回避一个由于错误的 center 字符串导致初始化失败抛出的错误
